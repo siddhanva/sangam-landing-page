@@ -1,0 +1,12 @@
+export { Navigation } from "./Navigation";
+export { HeroSection } from "./HeroSection";
+export { DashboardPreview } from "./DashboardPreview";
+export { ProblemSection } from "./ProblemSection";
+export { HowItWorksSection } from "./HowItWorksSection";
+export { AnalyticsSection } from "./AnalyticsSection";
+export { CollaborationSection } from "./CollaborationSection";
+export { CompetitiveSection } from "./CompetitiveSection";
+export { TestimonialsSection } from "./TestimonialsSection";
+export { PricingSection } from "./PricingSection";
+export { FinalCTASection } from "./FinalCTASection";
+export { Footer } from "./Footer";

@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useScroll, useSpring } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { GetEarlyAccessDialog } from "@/components/landing/GetEarlyAccessDialog";
+import { SangamLogo } from "@/components/landing/SangamLogo";
 
 const navLinks = [
   { label: "Features", href: "#features" },
@@ -13,6 +15,9 @@ const navLinks = [
 export const Navigation = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  const { scrollYProgress } = useScroll();
+  const scaleX = useSpring(scrollYProgress, { stiffness: 100, damping: 30, restDelta: 0.001 });
 
   useEffect(() => {
     const handleScroll = () => {
@@ -28,11 +33,17 @@ export const Navigation = () => {
         isScrolled ? "glass shadow-subtle" : "bg-transparent"
       }`}
     >
+      {/* Scroll progress bar */}
+      <motion.div
+        className="absolute bottom-0 left-0 right-0 h-[2px] origin-left bg-gradient-to-r from-primary via-sangam-indigo-light to-accent"
+        style={{ scaleX, opacity: isScrolled ? 1 : 0 }}
+      />
+
       <div className="container-custom">
         <div className="flex items-center justify-between h-[72px]">
           {/* Logo */}
-          <a href="#" className="flex items-center gap-2">
-            <span className="text-2xl font-bold text-primary">Sangam</span>
+          <a href="#" className="flex items-center">
+            <SangamLogo size="md" />
           </a>
 
           {/* Desktop Navigation */}
@@ -50,12 +61,9 @@ export const Navigation = () => {
 
           {/* Desktop CTAs */}
           <div className="hidden md:flex items-center gap-3">
-            <Button variant="ghost" className="font-medium">
-              Sign In
-            </Button>
-            <Button className="btn-primary font-semibold px-6">
-              Get Early Access
-            </Button>
+            <GetEarlyAccessDialog>
+              <Button className="btn-primary font-semibold px-6">Get Early Access</Button>
+            </GetEarlyAccessDialog>
           </div>
 
           {/* Mobile Menu Button */}
@@ -89,12 +97,9 @@ export const Navigation = () => {
                 </a>
               ))}
               <div className="flex flex-col gap-3 pt-4 border-t border-border">
-                <Button variant="ghost" className="w-full justify-center font-medium">
-                  Sign In
-                </Button>
-                <Button className="btn-primary w-full font-semibold">
-                  Get Early Access
-                </Button>
+                <GetEarlyAccessDialog>
+                  <Button className="btn-primary w-full font-semibold">Get Early Access</Button>
+                </GetEarlyAccessDialog>
               </div>
             </div>
           </motion.div>

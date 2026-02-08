@@ -1,6 +1,9 @@
 export { Navigation } from "./Navigation";
 export { HeroSection } from "./HeroSection";
 export { DashboardPreview } from "./DashboardPreview";
+export { SocialProofBar } from "./SocialProofBar";
+export { LogoMarquee } from "./LogoMarquee";
+export { WaveDivider } from "./WaveDivider";
 export { ProblemSection } from "./ProblemSection";
 export { HowItWorksSection } from "./HowItWorksSection";
 export { AnalyticsSection } from "./AnalyticsSection";

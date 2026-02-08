@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef, useState } from "react";
-import { Check } from "lucide-react";
+import { Check, BarChart3 } from "lucide-react";
 
 const features = [
   "Live Mastery Heatmaps",
@@ -18,8 +18,17 @@ export const AnalyticsSection = () => {
   const [activeTab, setActiveTab] = useState(0);
 
   return (
-    <section id="features" className="bg-muted/50 section-padding" ref={ref}>
-      <div className="container-custom">
+    <section id="features" className="relative overflow-hidden bg-muted/50 section-padding" ref={ref}>
+      {/* Background personality */}
+      <div className="pointer-events-none absolute inset-0">
+        <div className="absolute -top-24 right-0 w-72 h-72 rounded-full blur-3xl bg-gradient-to-br from-primary/12 to-sangam-indigo-light/10 orb-2" />
+        <div className="absolute -bottom-28 -left-24 w-96 h-96 rounded-full blur-3xl bg-gradient-to-tr from-sangam-indigo-light/10 to-primary/10 orb-1" />
+      </div>
+
+      {/* Floating accent shapes */}
+      <div className="pointer-events-none absolute top-[10%] left-[6%] w-12 h-12 rounded-lg bg-primary/5 border border-primary/10 rotate-45 hidden lg:block orb-3" />
+
+      <div className="container-custom relative">
         <div className="grid lg:grid-cols-[1fr,1.2fr] gap-12 lg:gap-16 items-center">
           {/* Left Column - Copy */}
           <motion.div
@@ -27,23 +36,28 @@ export const AnalyticsSection = () => {
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.6 }}
           >
+            <span className="eyebrow-badge">
+              <BarChart3 size={14} />
+              Analytics
+            </span>
             <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-6">
-              Simple, Meaningful, Powerful Analytics
+              Simple, Meaningful,{" "}
+              <span className="gradient-text">Powerful Analytics</span>
             </h2>
             <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
               Sangam's interface is designed to show high-impact insights at a glance—not overwhelm you with noise. See mastery heatmaps, lesson performance metrics, student group insights, and actionable signals that show where students struggled and how other teachers solved the same challenge.
             </p>
-            <ul className="space-y-3">
+            <ul className="space-y-4">
               {features.map((feature, index) => (
                 <motion.li
                   key={feature}
                   initial={{ opacity: 0, x: -20 }}
                   animate={isInView ? { opacity: 1, x: 0 } : {}}
                   transition={{ duration: 0.4, delay: 0.1 * (index + 1) }}
-                  className="flex items-center gap-3"
+                  className="flex items-center gap-3 group"
                 >
-                  <div className="w-5 h-5 rounded-full bg-accent/20 flex items-center justify-center">
-                    <Check className="w-3 h-3 text-accent" />
+                  <div className="w-6 h-6 rounded-full bg-gradient-to-br from-primary/20 to-sangam-indigo-light/20 flex items-center justify-center group-hover:from-primary/30 group-hover:to-sangam-indigo-light/30 transition-colors">
+                    <Check className="w-3.5 h-3.5 text-primary" />
                   </div>
                   <span className="text-foreground font-medium">{feature}</span>
                 </motion.li>
@@ -56,17 +70,18 @@ export const AnalyticsSection = () => {
             initial={{ opacity: 0, x: 30 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="bg-card rounded-2xl shadow-float p-6 border border-border"
+            className="relative glass-card rounded-2xl shadow-float p-6 overflow-hidden"
           >
+            <div className="pointer-events-none absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-primary via-sangam-indigo-light to-accent opacity-70" />
             {/* Tabs */}
-            <div className="flex gap-2 mb-6 p-1 bg-muted/50 rounded-lg w-fit">
+            <div className="flex gap-1 mb-6 p-1 bg-muted/50 rounded-lg w-fit">
               {tabs.map((tab, index) => (
                 <button
                   key={tab}
                   onClick={() => setActiveTab(index)}
                   className={`px-4 py-2 text-sm font-medium rounded-md transition-all ${
                     activeTab === index
-                      ? "bg-card text-foreground shadow-subtle"
+                      ? "bg-gradient-to-r from-primary to-sangam-indigo-light text-primary-foreground shadow-md"
                       : "text-muted-foreground hover:text-foreground"
                   }`}
                 >
@@ -221,7 +236,7 @@ const EngagementChart = () => {
         <text x="360" y="195" className="text-xs" fill="hsl(var(--muted-foreground))">Week 10</text>
       </svg>
       <p className="text-center text-sm text-muted-foreground mt-4">
-        Engagement increased 35% over 10 weeks
+        Engagement increased <span className="font-semibold text-accent">35%</span> over 10 weeks
       </p>
     </div>
   );
@@ -229,10 +244,10 @@ const EngagementChart = () => {
 
 const PerformanceChart = () => {
   const data = [
-    { label: "Your Class", value: 87, color: "bg-primary" },
-    { label: "School Avg", value: 72, color: "bg-primary/60" },
-    { label: "District Avg", value: 68, color: "bg-primary/40" },
-    { label: "Top 10%", value: 94, color: "bg-accent" },
+    { label: "Your Class", value: 87, gradient: true },
+    { label: "School Avg", value: 72, gradient: false },
+    { label: "District Avg", value: 68, gradient: false },
+    { label: "Top 10%", value: 94, gradient: true },
   ];
 
   return (
@@ -250,7 +265,7 @@ const PerformanceChart = () => {
           </div>
           <div className="h-4 bg-muted rounded-full overflow-hidden">
             <motion.div
-              className={`h-full rounded-full ${item.color}`}
+              className={`h-full rounded-full ${item.gradient ? "bg-gradient-to-r from-primary to-sangam-indigo-light" : "bg-primary/50"}`}
               initial={{ width: 0 }}
               animate={{ width: `${item.value}%` }}
               transition={{ duration: 0.8, delay: 0.1 * i }}

@@ -1,4 +1,5 @@
 import { Linkedin, Twitter, Github } from "lucide-react";
+import { SangamLogo } from "@/components/landing/SangamLogo";
 
 const footerLinks = {
   product: [
@@ -29,16 +30,26 @@ const socialLinks = [
 
 export const Footer = () => {
   return (
-    <footer className="bg-foreground text-primary-foreground">
-      <div className="container-custom py-16">
+    <footer className="relative bg-foreground text-primary-foreground overflow-hidden">
+      {/* Gradient top edge with animated glow */}
+      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-sangam-indigo-light/60 to-transparent" />
+      <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-sangam-indigo-light/8 to-transparent pointer-events-none" />
+      {/* Floating orbs */}
+      <div className="pointer-events-none absolute top-1/4 -right-20 w-64 h-64 rounded-full blur-3xl bg-primary/5 orb-2" />
+      <div className="pointer-events-none absolute bottom-1/4 -left-20 w-48 h-48 rounded-full blur-3xl bg-sangam-indigo-light/5 orb-1" />
+
+      <div className="container-custom py-16 relative">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-12">
           {/* Logo & Tagline */}
           <div className="col-span-2 md:col-span-1">
             <a href="#" className="inline-block mb-4">
-              <span className="text-2xl font-bold text-primary-foreground">Sangam</span>
+              <SangamLogo size="md" />
             </a>
-            <p className="text-primary-foreground/70 text-sm leading-relaxed">
+            <p className="text-primary-foreground/70 text-sm leading-relaxed mb-4">
               Collaborative intelligence for better teaching.
+            </p>
+            <p className="text-primary-foreground/50 text-xs italic">
+              Built for students, by students.
             </p>
           </div>
 
@@ -50,7 +61,7 @@ export const Footer = () => {
                 <li key={link.label}>
                   <a
                     href={link.href}
-                    className="text-primary-foreground/70 hover:text-primary-foreground transition-colors text-sm"
+                    className="text-primary-foreground/60 hover:text-primary-foreground transition-colors text-sm"
                   >
                     {link.label}
                   </a>
@@ -67,7 +78,7 @@ export const Footer = () => {
                 <li key={link.label}>
                   <a
                     href={link.href}
-                    className="text-primary-foreground/70 hover:text-primary-foreground transition-colors text-sm"
+                    className="text-primary-foreground/60 hover:text-primary-foreground transition-colors text-sm"
                   >
                     {link.label}
                   </a>
@@ -84,7 +95,7 @@ export const Footer = () => {
                 <li key={link.label}>
                   <a
                     href={link.href}
-                    className="text-primary-foreground/70 hover:text-primary-foreground transition-colors text-sm"
+                    className="text-primary-foreground/60 hover:text-primary-foreground transition-colors text-sm"
                   >
                     {link.label}
                   </a>
@@ -96,18 +107,18 @@ export const Footer = () => {
 
         {/* Bottom row */}
         <div className="flex flex-col md:flex-row items-center justify-between pt-8 border-t border-primary-foreground/10">
-          <p className="text-primary-foreground/60 text-sm mb-4 md:mb-0">
+          <p className="text-primary-foreground/50 text-sm mb-4 md:mb-0">
             © 2026 Sangam. All rights reserved.
           </p>
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-3">
             {socialLinks.map((social) => (
               <a
                 key={social.label}
                 href={social.href}
-                className="text-primary-foreground/70 hover:text-primary-foreground transition-colors"
+                className="w-9 h-9 rounded-full flex items-center justify-center text-primary-foreground/60 hover:text-primary-foreground hover:bg-primary/30 hover:scale-110 transition-all duration-200"
                 aria-label={social.label}
               >
-                <social.icon size={20} />
+                <social.icon size={18} />
               </a>
             ))}
           </div>

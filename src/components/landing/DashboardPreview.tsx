@@ -23,12 +23,12 @@ export const DashboardPreview = () => {
       <motion.div
         animate={{ y: [-5, 5, -5] }}
         transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute -top-8 -left-8 w-16 h-16 bg-gradient-to-br from-primary/30 to-accent/30 rounded-2xl blur-sm"
+        className="absolute -top-8 -left-8 w-16 h-16 bg-gradient-to-br from-primary/30 to-sangam-indigo-light/30 rounded-2xl blur-sm"
       />
       <motion.div
         animate={{ y: [5, -5, 5] }}
         transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute -bottom-6 -right-6 w-20 h-20 bg-gradient-to-tr from-accent/30 to-primary/30 rounded-full blur-sm"
+        className="absolute -bottom-6 -right-6 w-20 h-20 bg-gradient-to-tr from-sangam-indigo-light/30 to-primary/30 rounded-full blur-sm"
       />
 
       {/* Main dashboard card */}
@@ -36,7 +36,7 @@ export const DashboardPreview = () => {
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.6, delay: 0.4 }}
-        className="bg-card rounded-2xl shadow-float p-6 border border-border"
+        className="bg-card rounded-2xl shadow-float p-6 border border-border tilt-card"
       >
         {/* Dashboard header */}
         <div className="flex items-center justify-between mb-6">
@@ -141,14 +141,14 @@ export const DashboardPreview = () => {
         </div>
       </motion.div>
 
-      {/* Floating insight card */}
+      {/* AI Insight card — positioned below the dashboard so the heatmap stays visible */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 1.2 }}
-        className="absolute -bottom-4 -left-4 bg-card rounded-xl shadow-elevated p-4 border border-border max-w-[200px]"
+        className="mt-4 bg-card rounded-xl shadow-elevated p-4 border border-border"
       >
-        <div className="flex items-start gap-3">
+        <div className="flex items-center gap-3">
           <div className="w-8 h-8 rounded-lg bg-accent/10 flex items-center justify-center flex-shrink-0">
             <span className="text-accent text-sm">✨</span>
           </div>

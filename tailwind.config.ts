@@ -121,6 +121,14 @@ export default {
           "0%, 100%": { opacity: "1" },
           "50%": { opacity: "0.5" },
         },
+        shimmer: {
+          "0%": { backgroundPosition: "200% 0" },
+          "100%": { backgroundPosition: "-200% 0" },
+        },
+        "glow-pulse": {
+          "0%, 100%": { boxShadow: "0 0 20px 0 hsl(var(--primary) / 0.15)" },
+          "50%": { boxShadow: "0 0 30px 5px hsl(var(--primary) / 0.25)" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -132,6 +140,8 @@ export default {
         "draw-line": "draw-line 1.5s ease-out forwards",
         float: "float 3s ease-in-out infinite",
         pulse: "pulse 2s ease-in-out infinite",
+        shimmer: "shimmer 3s ease-in-out infinite",
+        "glow-pulse": "glow-pulse 3s ease-in-out infinite",
       },
     },
   },

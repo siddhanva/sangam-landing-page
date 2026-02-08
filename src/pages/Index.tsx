@@ -1,55 +1,61 @@
 import {
   Navigation,
   HeroSection,
-  SocialProofBar,
   WaveDivider,
-  ProblemSection,
   HowItWorksSection,
+  FlywheelSection,
   AnalyticsSection,
   CollaborationSection,
   CompetitiveSection,
-  TestimonialsSection,
   PricingSection,
   FinalCTASection,
+  FAQSection,
   Footer,
 } from "@/components/landing";
 
 const Index = () => {
   return (
     <div className="min-h-screen bg-background">
+      {/* Skip to main content for accessibility */}
+      <a href="#main-content" className="skip-to-main">
+        Skip to main content
+      </a>
+
       <Navigation />
-      <HeroSection />
-      <SocialProofBar />
 
-      {/* Wave transition into Problem section */}
-      <WaveDivider toColor="hsl(var(--muted) / 0.5)" />
-      <ProblemSection />
+      <main id="main-content">
+        <HeroSection />
 
-      {/* Wave transition into How It Works */}
-      <WaveDivider flip toColor="hsl(var(--card))" />
-      <HowItWorksSection />
+        {/* 1. Features */}
+        <WaveDivider toColor="hsl(var(--muted) / 0.5)" />
+        <AnalyticsSection />
 
-      {/* Wave transition into Analytics */}
-      <WaveDivider toColor="hsl(var(--muted) / 0.5)" />
-      <AnalyticsSection />
+        <WaveDivider flip toColor="hsl(var(--card))" />
+        <CollaborationSection />
 
-      {/* Wave transition into Collaboration */}
-      <WaveDivider flip toColor="hsl(var(--card))" />
-      <CollaborationSection />
+        {/* 2. How It Works */}
+        <WaveDivider toColor="hsl(var(--card))" />
+        <HowItWorksSection />
 
-      {/* Wave transition into Competitive */}
-      <WaveDivider toColor="hsl(var(--muted) / 0.5)" />
-      <CompetitiveSection />
+        {/* Collective Intelligence + Fork & Adapt */}
+        <WaveDivider toColor="hsl(var(--card))" />
+        <FlywheelSection />
 
-      {/* Wave transition into Testimonials */}
-      <WaveDivider flip toColor="hsl(var(--card))" />
-      <TestimonialsSection />
+        {/* 3. Pricing */}
+        <WaveDivider toColor="hsl(var(--muted) / 0.5)" />
+        <PricingSection />
 
-      {/* Wave transition into Pricing */}
-      <WaveDivider toColor="hsl(var(--muted) / 0.5)" />
-      <PricingSection />
+        {/* FAQ */}
+        <WaveDivider flip toColor="hsl(var(--card))" />
+        <FAQSection />
 
-      <FinalCTASection />
+        {/* 4. About */}
+        <WaveDivider toColor="hsl(var(--muted) / 0.5)" />
+        <CompetitiveSection />
+
+        <FinalCTASection />
+      </main>
+
       <Footer />
     </div>
   );

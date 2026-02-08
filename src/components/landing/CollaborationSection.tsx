@@ -26,7 +26,7 @@ export const CollaborationSection = () => {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section className="relative overflow-hidden section-padding bg-card" ref={ref}>
+    <section className="relative overflow-hidden section-padding bg-card" ref={ref} aria-labelledby="collab-heading">
       {/* Background accents */}
       <div className="pointer-events-none absolute inset-0">
         <div className="absolute -top-20 left-1/3 w-72 h-72 rounded-full blur-3xl bg-gradient-to-br from-primary/10 to-sangam-indigo-light/8" />
@@ -45,34 +45,40 @@ export const CollaborationSection = () => {
             <Handshake size={14} />
             Collaboration & Trust
           </span>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-6">
+          <h2 id="collab-heading" className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-6">
             Built for Collaboration,{" "}
             <span className="gradient-text">Designed for Trust</span>
           </h2>
-          <p className="text-lg text-muted-foreground">
-            Teachers control sharing. Schools benefit from collective intelligence. Students' privacy is always protected.
+          <p className="text-lg text-muted-foreground max-w-xl mx-auto">
+            You control what you share. Schools benefit from collective intelligence. Student privacy is non-negotiable.
           </p>
         </motion.div>
 
         {/* Feature cards */}
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
           {features.map((feature, index) => (
             <motion.div
               key={feature.headline}
               initial={{ opacity: 0, y: 30 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: 0.1 * (index + 1) }}
-              className="group text-center glass-card rounded-2xl p-8 card-hover-glow tilt-card"
+              className="group glass-card rounded-2xl overflow-hidden card-hover-glow tilt-card"
             >
-              <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-primary/10 to-sangam-indigo-light/10 flex items-center justify-center mx-auto mb-6 group-hover:from-primary/20 group-hover:to-sangam-indigo-light/20 transition-all group-hover:scale-110 duration-300">
-                <feature.icon className="w-8 h-8 text-primary" />
+              {/* Gradient top bar */}
+              <div className="pointer-events-none h-1 bg-gradient-to-r from-primary to-sangam-indigo-light opacity-50 group-hover:opacity-100 transition-opacity" />
+
+              {/* Card content */}
+              <div className="p-6 text-center">
+                <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-gradient-to-br from-primary/10 to-sangam-indigo-light/10 mb-4 group-hover:from-primary/20 group-hover:to-sangam-indigo-light/20 transition-colors">
+                  <feature.icon className="w-6 h-6 text-primary" />
+                </div>
+                <h3 className="text-lg font-semibold text-foreground mb-2">
+                  {feature.headline}
+                </h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  {feature.copy}
+                </p>
               </div>
-              <h3 className="text-xl font-semibold text-foreground mb-3">
-                {feature.headline}
-              </h3>
-              <p className="text-muted-foreground leading-relaxed">
-                {feature.copy}
-              </p>
             </motion.div>
           ))}
         </div>

@@ -18,7 +18,7 @@ export const DashboardPreview = () => {
   };
 
   return (
-    <div className="relative">
+    <div className="relative" role="img" aria-label="Sangam dashboard showing student mastery heatmap with AI-generated insights">
       {/* Floating decorative shapes */}
       <motion.div
         animate={{ y: [-5, 5, -5] }}
@@ -36,7 +36,11 @@ export const DashboardPreview = () => {
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.6, delay: 0.4 }}
-        className="bg-card rounded-2xl shadow-float p-6 border border-border tilt-card"
+        className="bg-card rounded-[20px] p-6 border border-border tilt-card"
+        style={{
+          filter: "drop-shadow(0 25px 50px rgba(99, 102, 241, 0.18))",
+          boxShadow: "0 0 0 1px rgba(0,0,0,0.05), 0 20px 40px rgba(0,0,0,0.08)",
+        }}
       >
         {/* Dashboard header */}
         <div className="flex items-center justify-between mb-6">
@@ -45,7 +49,12 @@ export const DashboardPreview = () => {
             <p className="text-sm text-muted-foreground">Week of Feb 3, 2026</p>
           </div>
           <div className="flex gap-2">
-            <span className="px-3 py-1 text-xs font-medium bg-accent/10 text-accent rounded-full">
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 text-xs font-semibold bg-emerald-500 text-white rounded-full uppercase tracking-wider">
+              <motion.span
+                animate={{ opacity: [1, 0.3, 1] }}
+                transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+                className="w-2 h-2 rounded-full bg-white inline-block"
+              />
               Live
             </span>
           </div>
@@ -71,9 +80,9 @@ export const DashboardPreview = () => {
                     initial={{ scale: 0 }}
                     animate={{ scale: 1 }}
                     transition={{ delay: 0.6 + i * 0.05 + j * 0.03 }}
-                    className={`flex-1 h-8 rounded ${getHeatmapColor(value)} flex items-center justify-center`}
+                    className={`flex-1 h-8 rounded-md ${getHeatmapColor(value)} flex items-center justify-center cursor-pointer transition-transform duration-200 hover:scale-110 hover:z-10 hover:shadow-[0_4px_12px_rgba(0,0,0,0.15)]`}
                   >
-                    <span className="text-[10px] font-medium text-primary-foreground">
+                    <span className="text-[10px] font-semibold text-primary-foreground">
                       {value}%
                     </span>
                   </motion.div>
@@ -141,24 +150,62 @@ export const DashboardPreview = () => {
         </div>
       </motion.div>
 
-      {/* AI Insight card — positioned below the dashboard so the heatmap stays visible */}
+      {/* AI Insight bubble — floats alongside the dashboard like a living tooltip */}
       <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 1.2 }}
-        className="mt-4 bg-card rounded-xl shadow-elevated p-4 border border-border"
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ delay: 1.2, type: "spring", stiffness: 150 }}
+        className="absolute -right-4 top-[40%] z-10 hidden sm:block"
       >
-        <div className="flex items-center gap-3">
-          <div className="w-8 h-8 rounded-lg bg-accent/10 flex items-center justify-center flex-shrink-0">
-            <span className="text-accent text-sm">✨</span>
+        <motion.div
+          animate={{
+            x: [0, 8, -4, 6, 0],
+            y: [0, -10, 6, -8, 0],
+            rotate: [0, 2, -1, 1.5, 0],
+          }}
+          transition={{
+            duration: 10,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+          className="bg-card/95 backdrop-blur-md rounded-2xl shadow-float p-4 border border-border max-w-[200px]"
+        >
+          <div className="flex items-start gap-3">
+            <motion.div
+              animate={{ scale: [1, 1.15, 1] }}
+              transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+              className="w-6 h-6 flex-shrink-0"
+            >
+              <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <linearGradient id="ai-grad-indigo" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stopColor="#5b52e6" />
+                    <stop offset="100%" stopColor="#7168ea" />
+                  </linearGradient>
+                  <linearGradient id="ai-grad-teal" x1="0%" y1="100%" x2="100%" y2="0%">
+                    <stop offset="0%" stopColor="#7168ea" />
+                    <stop offset="100%" stopColor="#22d3ee" />
+                  </linearGradient>
+                </defs>
+                <circle cx="32" cy="32" r="27" stroke="url(#ai-grad-indigo)" strokeWidth="2.5" fill="none" opacity="0.3"/>
+                <path d="M19 13C22 22 27 27 32 32" stroke="url(#ai-grad-indigo)" strokeWidth="3.8" strokeLinecap="round" fill="none"/>
+                <path d="M9 42C19 39 25 35 32 32" stroke="url(#ai-grad-indigo)" strokeWidth="3.8" strokeLinecap="round" fill="none"/>
+                <path d="M55 42C45 39 39 35 32 32" stroke="url(#ai-grad-teal)" strokeWidth="3.8" strokeLinecap="round" fill="none"/>
+                <circle cx="32" cy="32" r="5.5" fill="url(#ai-grad-indigo)"/>
+                <circle cx="32" cy="32" r="2.2" fill="white" opacity="0.9"/>
+                <circle cx="32" cy="32" r="13" stroke="url(#ai-grad-teal)" strokeWidth="1.5" fill="none" opacity="0.25"/>
+              </svg>
+            </motion.div>
+            <div>
+              <p className="text-xs font-semibold text-foreground">AI Insight</p>
+              <p className="text-[11px] text-muted-foreground leading-relaxed">
+                Adding visual models here improved mastery by 22%
+              </p>
+            </div>
           </div>
-          <div>
-            <p className="text-xs font-medium text-foreground">AI Insight</p>
-            <p className="text-[11px] text-muted-foreground">
-              Adding visual models here improved mastery by 22%
-            </p>
-          </div>
-        </div>
+          {/* Bubble tail */}
+          <div className="absolute -left-2 top-1/2 -translate-y-1/2 w-3 h-3 bg-card/95 border-l border-b border-border rotate-45" />
+        </motion.div>
       </motion.div>
     </div>
   );

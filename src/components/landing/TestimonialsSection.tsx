@@ -30,21 +30,6 @@ const testimonials = [
   },
 ];
 
-const images = [
-  {
-    src: "https://images.unsplash.com/photo-1523580846011-d3a5bc25702b?auto=format&fit=crop&w=900&h=600&q=80",
-    alt: "Educators collaborating",
-  },
-  {
-    src: "https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=900&h=600&q=80",
-    alt: "Teacher with students",
-  },
-  {
-    src: "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=900&h=600&q=80",
-    alt: "Teamwork and learning",
-  },
-];
-
 export const TestimonialsSection = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
@@ -73,40 +58,19 @@ export const TestimonialsSection = () => {
             Trusted by{" "}
             <span className="gradient-text">Innovative Educators</span>
           </h2>
-        </motion.div>
-
-        {/* Photo strip */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.15 }}
-          className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-12 max-w-4xl mx-auto"
-        >
-          {images.map((img) => (
-            <div
-              key={img.src}
-              className="relative rounded-2xl overflow-hidden border border-border shadow-card bg-muted/30 aspect-[3/2] group"
-            >
-              <img
-                src={img.src}
-                alt={img.alt}
-                loading="lazy"
-                decoding="async"
-                className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-              />
-              <div className="absolute inset-0 bg-gradient-to-tr from-primary/25 to-sangam-indigo-light/15 group-hover:opacity-80 transition-opacity" />
-            </div>
-          ))}
+          <p className="text-lg text-muted-foreground">
+            Hear from teachers and administrators who are transforming their classrooms with Sangam.
+          </p>
         </motion.div>
 
         {/* Testimonial cards */}
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
           {testimonials.map((testimonial, index) => (
             <motion.div
               key={testimonial.name}
               initial={{ opacity: 0, y: 30 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: 0.1 * (index + 1) + 0.2 }}
+              transition={{ duration: 0.5, delay: 0.1 * (index + 1) + 0.3 }}
               className="group relative glass-card rounded-2xl p-6 card-hover-glow overflow-hidden tilt-card"
             >
               {/* Gradient top bar */}

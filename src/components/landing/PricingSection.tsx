@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import { Check, CreditCard, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { GetEarlyAccessDialog } from "@/components/landing/GetEarlyAccessDialog";
@@ -9,9 +9,8 @@ const plans = [
   {
     name: "Free",
     subtitle: "Pilot",
-    monthlyPrice: "$0",
-    annualPrice: "$0",
-    period: "/teacher",
+    price: "$0",
+    period: "/student/year",
     features: [
       "5 lessons",
       "Basic mastery analytics",
@@ -20,13 +19,13 @@ const plans = [
     ],
     cta: "Start Free Trial",
     highlighted: false,
+    subline: null as string | null,
   },
   {
     name: "Professional",
     subtitle: "Most Popular",
-    monthlyPrice: "$15",
-    annualPrice: "$12",
-    period: "/teacher/month",
+    price: "$5",
+    period: "/student/year",
     features: [
       "Unlimited lessons",
       "Advanced analytics & heatmaps",
@@ -37,12 +36,12 @@ const plans = [
     ],
     cta: "Start Free Trial",
     highlighted: true,
+    subline: "Volume discounts for districts",
   },
   {
     name: "Enterprise",
     subtitle: "Custom",
-    monthlyPrice: "Custom",
-    annualPrice: "Custom",
+    price: "Custom",
     period: "",
     features: [
       "Everything in Professional",
@@ -53,14 +52,13 @@ const plans = [
     ],
     cta: "Request Demo",
     highlighted: false,
+    subline: null as string | null,
   },
 ];
 
 export const PricingSection = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
-  const [billingCycle, setBillingCycle] = useState<"monthly" | "annual">("annual");
-
   return (
     <section id="pricing" className="relative overflow-hidden bg-muted/50 section-padding" ref={ref} aria-labelledby="pricing-heading">
       {/* Background accents */}
@@ -86,49 +84,13 @@ export const PricingSection = () => {
             <span className="gradient-text">Pricing</span>
           </h2>
           <p className="text-lg text-muted-foreground">
-            Start free. Scale with confidence. Volume discounts for districts.
+            $5/student/year. Start free. Scale with confidence. Volume discounts for districts.
           </p>
-        </motion.div>
-
-        {/* Billing cycle toggle */}
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5, delay: 0.1 }}
-          className="flex items-center justify-center gap-3 mb-12"
-        >
-          <div className="flex items-center p-1 rounded-full bg-muted/80 border border-border/50">
-            <button
-              onClick={() => setBillingCycle("monthly")}
-              className={`px-5 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
-                billingCycle === "monthly"
-                  ? "bg-card text-foreground shadow-sm"
-                  : "text-muted-foreground hover:text-foreground"
-              }`}
-            >
-              Monthly
-            </button>
-            <button
-              onClick={() => setBillingCycle("annual")}
-              className={`px-5 py-2 rounded-full text-sm font-medium transition-all duration-300 relative ${
-                billingCycle === "annual"
-                  ? "bg-card text-foreground shadow-sm"
-                  : "text-muted-foreground hover:text-foreground"
-              }`}
-            >
-              Annual
-              <span className="ml-1.5 inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold bg-accent/15 text-accent">
-                Save 20%
-              </span>
-            </button>
-          </div>
         </motion.div>
 
         {/* Pricing cards */}
         <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto items-start">
-          {plans.map((plan, index) => {
-            const price = billingCycle === "annual" ? plan.annualPrice : plan.monthlyPrice;
-            return (
+          {plans.map((plan, index) => (
               <motion.div
                 key={plan.name}
                 initial={{ opacity: 0, y: 30 }}
@@ -156,17 +118,17 @@ export const PricingSection = () => {
                   <p className="text-sm font-semibold text-muted-foreground uppercase tracking-wider mb-2">
                     {plan.name}
                   </p>
-                  <div className="flex items-baseline justify-center gap-1">
+                  <div className="flex items-baseline justify-center gap-1 flex-wrap">
                     <span className={`text-5xl font-bold tracking-tight ${plan.highlighted ? "gradient-text" : "text-foreground"}`}>
-                      {price}
+                      {plan.price}
                     </span>
                     {plan.period && (
                       <span className="text-muted-foreground text-base">{plan.period}</span>
                     )}
                   </div>
-                  {plan.highlighted && billingCycle === "annual" && (
+                  {plan.subline && (
                     <p className="text-xs text-accent font-medium mt-2">
-                      Billed annually · Save $36/year per teacher
+                      {plan.subline}
                     </p>
                   )}
                 </div>
@@ -216,8 +178,7 @@ export const PricingSection = () => {
                   </p>
                 )}
               </motion.div>
-            );
-          })}
+          ))}
         </div>
       </div>
     </section>

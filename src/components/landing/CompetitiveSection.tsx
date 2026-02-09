@@ -40,11 +40,11 @@ const dimensions = [
   "Real-Time Mastery Analytics",
   "Teacher Attribution",
   "FERPA & COPPA Compliant",
-  "Price Per Teacher",
+  "Price Per Student",
 ];
 
 const competitors = [
-  { name: "Sangam", highlight: true, values: ["✓", "✓", "✓", "✓", "✓", "✓", "✓", "$15/mo"] },
+  { name: "Sangam", highlight: true, values: ["✓", "✓", "✓", "✓", "✓", "✓", "✓", "$5/year"] },
   { name: "Canvas / Schoology", highlight: false, values: ["✗", "✗", "✗", "✗", "Partial", "✗", "✓", "$$$"] },
   { name: "Teachers Pay Teachers", highlight: false, values: ["✗", "✗", "✗", "✗", "✗", "Partial", "N/A", "Per resource"] },
   { name: "AI Tutor Platforms", highlight: false, values: ["Partial", "✗", "✗", "✗", "Partial", "✗", "Varies", "$$$"] },

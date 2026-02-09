@@ -168,8 +168,8 @@ export const HeroSection = () => {
             >
               {[
                 { icon: Shield, label: "FERPA Compliant", highlight: "FERPA" },
-                { icon: Users, label: "Trusted by 50+ Districts", highlight: "50+" },
-                { icon: Star, label: "4.9/5 · 500+ Reviews", fill: true, highlight: "4.9" },
+                { icon: Users, label: "Trusted by 5+ Districts", highlight: "5+" },
+                { icon: Star, label: "4.9/5 · 50+ Reviews", fill: true, highlight: "4.9" },
               ].map((item, i) => (
                 <motion.div
                   key={item.label}
@@ -218,7 +218,7 @@ export const HeroSection = () => {
               </div>
               <div>
                 <p className="text-sm font-medium text-foreground/70">
-                  347 teachers joined this week
+                  20 teachers joined this week
                 </p>
               </div>
             </motion.div>

@@ -3,6 +3,7 @@ import { Play, Shield, Users, Star, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { DashboardPreview } from "./DashboardPreview";
 import { GetEarlyAccessDialog } from "@/components/landing/GetEarlyAccessDialog";
+import { DemoVideoDialog } from "@/components/landing/DemoVideoDialog";
 
 const headlineWords = ["See", "What's", "Working", "In", "Your", "Classroom"];
 
@@ -138,14 +139,16 @@ export const HeroSection = () => {
                   <div className="absolute inset-0 bg-gradient-to-r from-primary via-sangam-indigo-light to-primary bg-[length:200%_100%] opacity-0 group-hover:opacity-100 transition-opacity duration-500 animate-[shimmer_2s_infinite]" />
                 </Button>
               </GetEarlyAccessDialog>
-              <Button
-                size="lg"
-                variant="outline"
-                className="text-base px-8 py-6 font-medium gap-2 group border-2 border-border hover:border-muted-foreground/30 hover:bg-muted/50 transition-all"
-              >
-                <Play size={16} className="fill-current group-hover:scale-110 transition-transform" />
-                Watch 2-Min Demo
-              </Button>
+              <DemoVideoDialog>
+                <Button
+                  size="lg"
+                  variant="outline"
+                  className="text-base px-8 py-6 font-medium gap-2 group border-2 border-border hover:border-muted-foreground/30 hover:bg-muted/50 transition-all"
+                >
+                  <Play size={16} className="fill-current group-hover:scale-110 transition-transform" />
+                  Watch 3-Min Demo
+                </Button>
+              </DemoVideoDialog>
             </motion.div>
             <motion.p
               initial={{ opacity: 0 }}
